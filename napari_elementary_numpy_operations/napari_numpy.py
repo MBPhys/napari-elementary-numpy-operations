@@ -108,6 +108,7 @@ class elementary_numpy(QWidget):
         
         self.axis_1.changed.connect(self.update_buttons)
         self.axis_2.changed.connect(self.update_buttons)
+        self.select_layer.changed.connect(self.update_buttons)
         
     def update_buttons(self):
         w_buttons = QWidget()  
@@ -132,13 +133,16 @@ class elementary_numpy(QWidget):
          
         self.layout().insertWidget(2, w_buttons)
         self.layout().itemAt(3).widget().deleteLater()
+        self.layout().itemAt(4).widget().deleteLater()
         
         
     def selected_layer(self):
             select_layer_name=self.select_layer[0].current_choice
+           
             try:
              self.layer_sel_layer=self.viewer.layers[select_layer_name] 
              self.viewer.layers.selection.active=self.viewer.layers[select_layer_name] 
+          
             except:
              pass   
            
@@ -164,6 +168,8 @@ class elementary_numpy(QWidget):
              
              self.select_layer.changed.connect(self.change_SpinBox)
              self.select_layer.changed.connect(self.remove_SpinBox)
+
+             self.select_layer.changed.connect(self.update_buttons) 
              
              
              self.selected_layer()
