@@ -96,7 +96,14 @@ class elementary_numpy(QWidget):
         
         self.select_layer.changed.connect(self.change_SpinBox)
         self.select_layer.changed.connect(self.remove_SpinBox)
-    
+        
+        self.viewer.layers.events.inserted.connect(self.change_SpinBox)
+        self.viewer.layers.events.inserted.connect(self.remove_SpinBox)
+
+        self.viewer.layers.events.removed.connect(self.change_SpinBox)
+        self.viewer.layers.events.removed.connect(self.remove_SpinBox)
+
+
         self.viewer.layers.events.inserted.connect(self.change_combo)
         self.viewer.layers.events.inserted.connect(self.remove_combo)
      
